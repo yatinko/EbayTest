@@ -4,7 +4,7 @@
 package com.ebay.login;
 
 /**
- * @author Sindiya
+ * @author 
  *
  */
 public class LoginPage {

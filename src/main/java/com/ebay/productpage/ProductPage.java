@@ -4,7 +4,7 @@
 package com.ebay.productpage;
 
 /**
- * @author Sindiya
+ * @author 
  *
  */
 public class ProductPage {

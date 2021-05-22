@@ -4,7 +4,7 @@
 package com.ebay.checkout;
 
 /**
- * @author Sindiya
+ * @author 
  *
  */
 public class CartPage {

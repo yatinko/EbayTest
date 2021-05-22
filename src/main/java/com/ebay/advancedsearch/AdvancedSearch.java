@@ -4,7 +4,7 @@
 package com.ebay.advancedsearch;
 
 /**
- * @author Sindiya
+ * @author 
  *
  */
 public class AdvancedSearch {

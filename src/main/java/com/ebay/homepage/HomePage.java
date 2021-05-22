@@ -4,7 +4,7 @@
 package com.ebay.homepage;
 
 /**
- * @author Sindiya
+ * @author yatinko
  *
  */
 public class HomePage {
