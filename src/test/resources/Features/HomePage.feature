@@ -1,4 +1,4 @@
-#Author: yatinko
+#Author: yatink
 @HomePage
 Feature: HomePage
 
@@ -9,18 +9,14 @@ Feature: HomePage
   Scenario: check the title
     Given User is on HomePage
     Then check the title of the page
+    Then User quits browser
 
-  @Sanity
+  @Ignore
   Scenario: Successful display of relevant products
     Given User is on HomePage
-    When user enters <validSearchItem> & <validSearchCategory> in searchbar
+    When user enters valid data in searchbar
     And clicks the Search button
     Then display relevant products
-	
-  Examples:
-	| validSearchItem | validSearchCategory 		   |
-    | apple macbook   |	Computers/Tablets & Networking |
-    | apple iphone    | Cell Phones & Accessories      |
 
   @Ignore
   Scenario: Failure finding products
