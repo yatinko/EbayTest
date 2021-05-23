@@ -5,34 +5,34 @@ Feature: HomePage
   Background: 
     Given User is already on HomePage
 
-  @Sanity
+  @Test
   Scenario: check the title
     Given User is on HomePage
     Then check the title of the page
 
-  @Sanity
-  Scenario: Successful display of relevant products
+  @Test
+  Scenario Outline: Successful display of relevant products
     Given User is on HomePage
-    When user enters <validSearchItem> & <validSearchCategory> in searchbar
+    When user enters "<searchItem>" and "<searchCategory>" in searchbar
     And clicks the Search button
     Then display relevant products
-	
-  Examples:
-	| validSearchItem | validSearchCategory 		   |
-    | apple macbook   |	Computers/Tablets & Networking |
-    | apple iphone    | Cell Phones & Accessories      |
+  
+	Examples:
+	  | searchItem	  | searchCategory 		           |
+      | apple macbook | Computers/Tablets & Networking |
+      | apple iphone  | Cell Phones & Accessories      |
 
-  @Ignore
-  Scenario: Failure finding products
+  @Test
+  Scenario Outline: Failure finding products
     Given User is on HomePage
-    When user enters <invalidSearchItem> & <validSearchCategory> in searchbar
+    When user enters "<searchItem>" and "<searchCategory>" in searchbar
     And clicks the Search button
     Then display appropriate message
     	
-  Examples:
-	| invalidSearchItem | validSearchCategory 		     |
-    | %%$$              | Computers/Tablets & Networking |
-    | ^$DS$             | Cell Phones & Accessories      |
+  	Examples:
+	  | searchItem | searchCategory 				|
+      | TYUT       | Computers/Tablets & Networking |
+      | HGGJH      | Cell Phones & Accessories      |
 
   @Ignore
   Scenario: Successful display of dropdown components
