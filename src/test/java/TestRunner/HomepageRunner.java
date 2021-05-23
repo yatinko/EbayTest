@@ -14,7 +14,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
 	features="src/test/resources/",
 	glue="StepDefinitions",
-	tags= "@Sanity",
+	tags= "@Test",
 	plugin= {
 			"pretty",
 			"html:target/CucmberTestReports/HTML-Reports",
