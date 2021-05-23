@@ -9,6 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
+import PageFactory.Homepage_PF;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,25 +19,40 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * @author yatink
+ * @author yatinko
  *
  */
 public class HomepageSteps {
 	WebDriver driver;
-	@Given("User is already on HomePage")
-	public void user_is_already_on_home_page() {
+	Homepage_PF home;
+	
+	@Before
+	public void config() {
+//		Initializing web driver
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
+	}
+	
+	@After
+	public void wrapUp() {
+		driver.close();
+	}
+	
+	@Given("User is already on HomePage")
+	public void user_is_already_on_home_page() {		
 //	    Navigating to the homepage
-	    driver.get("https://www.ebay.com/");
+		driver.get("https://www.ebay.com/");
+		System.out.println("========================================");
 	}
 
 	@Given("User is on HomePage")
 	public void user_is_on_home_page() {
-//		Finding navbar home component
-		WebElement navHomeComponent = driver.findElement(By.className("hl-cat-nav__active"));
-	   	WebElement navHomeSpan = navHomeComponent.findElement(By.tagName("span"));
-	   	String navHomeSpanString = navHomeSpan.getText();
+//		Initializing home object
+		home = new Homepage_PF(driver);
+		
+//		Getting navbar home component's text
+		String navHomeSpanString = home.getHomeNavText();
+		System.out.println(navHomeSpanString);
 	    
 //	   	Check if the home component is active
 	   	Assert.assertEquals(navHomeSpanString, "Home");
@@ -48,23 +66,19 @@ public class HomepageSteps {
 		
 //		Checking if the title is correct
 	    Assert.assertEquals("Electronics, Cars, Fashion, Collectibles & More | eBay", title);
-	}
-	
-	@Then("User quits browser")
-	public void user_quits_browser() {
-	    driver.quit();
+	    System.out.println("Title matched");
 	}
 
-	@When("user enters valid data in searchbar")
-	public void user_enters_valid_data_in_searchbar() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("When user enters <validSearchItem> & <validSearchCategory> in searchbar")
+	public void user_enters_valid_data_in_searchbar(String validSearchItem, String validSearchCategory) {
+	    
+		home.enterSearchText(validSearchItem);
+		home.selectSearchCategory(validSearchCategory);
 	}
 
 	@And("clicks the Search button")
 	public void clicks_the_search_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		home.searchProduct();
 	}
 
 	@Then("display relevant products")
