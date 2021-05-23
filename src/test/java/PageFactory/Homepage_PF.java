@@ -5,7 +5,6 @@ package PageFactory;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -18,7 +17,8 @@ public class Homepage_PF {
 	
 	WebDriver driver;
 	
-	@FindBy(xpath = "//*li[@id=\"hl-cat-nav__active\"]/span")
+	// WebElement components
+	@FindBy(xpath = "//*[@id=\"mainContent\"]/div[1]/ul/li[1]/span")
 	WebElement navHomeComponent;
 	
 	@FindBy(xpath = "//*[@id=\"gh-ac\"]")
@@ -34,11 +34,18 @@ public class Homepage_PF {
 	WebElement totalResults;
 	
 	@FindBy(xpath = "//*[@id=\"mainContent\"]/div[1]/div/div[2]/div[1]/div[1]/h1/span[2]")
-	WebElement searchElement;
+	WebElement searchResultElement;
 	
+	@FindBy(xpath = "//*[@id=\"x-refine__group__0\"]/ul/li/ul/li[1]/span")
+	WebElement searchResultCategory;
+	
+	@FindBy(xpath = "//*[@id=\"s0-14-11-6-3-save_search1-answer-17\"]/div[1]/h3")
+	WebElement searchResultDiv;
+	
+	// Constructor for PageFactory
 	public Homepage_PF(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver,Homepage_PF.class);
+		PageFactory.initElements(driver, this);
 	}
 	
 	public String getHomeNavText() {
@@ -64,5 +71,22 @@ public class Homepage_PF {
 
 	public void searchProduct() {
 		searchButton.click();
+	}
+
+	public int checkTotalProducts() {
+		String totalResultsString = totalResults.getText().replace(",", "");
+		return Integer.parseInt(totalResultsString);
+	}
+
+	public String checkIfProductIsCorrect() {
+		return searchResultElement.getText();
+	}
+	
+	public String checkIfProductCategoryIsCorrect() {
+		return searchResultCategory.getText();
+	}
+
+	public String checkNoProductFoundWarning() {
+		return searchResultDiv.getText();
 	}
 }
