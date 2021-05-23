@@ -3,32 +3,56 @@
  */
 package StepDefinitions;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * @author yatink
  *
  */
 public class HomepageSteps {
+	WebDriver driver;
 	@Given("User is already on HomePage")
 	public void user_is_already_on_home_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+//	    Navigating to the homepage
+	    driver.get("https://www.ebay.com/");
 	}
 
 	@Given("User is on HomePage")
 	public void user_is_on_home_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//		Finding navbar home component
+		WebElement navHomeComponent = driver.findElement(By.className("hl-cat-nav__active"));
+	   	WebElement navHomeSpan = navHomeComponent.findElement(By.tagName("span"));
+	   	String navHomeSpanString = navHomeSpan.getText();
+	    
+//	   	Check if the home component is active
+	   	Assert.assertEquals(navHomeSpanString, "Home");
+	   	System.out.println("User is on homepage");
 	}
 
 	@Then("check the title of the page")
 	public void check_the_title_of_the_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+//		Getting the page title
+		String title = driver.getTitle();
+		
+//		Checking if the title is correct
+	    Assert.assertEquals("Electronics, Cars, Fashion, Collectibles & More | eBay", title);
+	}
+	
+	@Then("User quits browser")
+	public void user_quits_browser() {
+	    driver.quit();
 	}
 
 	@When("user enters valid data in searchbar")
