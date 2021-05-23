@@ -25,9 +25,14 @@ Feature: HomePage
   @Ignore
   Scenario: Failure finding products
     Given User is on HomePage
-    When user invalid data in searchbar
+    When user enters <invalidSearchItem> & <validSearchCategory> in searchbar
     And clicks the Search button
     Then display appropriate message
+    	
+  Examples:
+	| invalidSearchItem | validSearchCategory 		     |
+    | %%$$              | Computers/Tablets & Networking |
+    | ^$DS$             | Cell Phones & Accessories      |
 
   @Ignore
   Scenario: Successful display of dropdown components
