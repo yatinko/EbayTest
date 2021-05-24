@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 		features = "src/test/resources/Features/ProductPage.feature", //the path of the feature files
-		glue = {"stepDefinition"},
+		glue = {"StepDefinitions"},
 		//the path of the step definition files
 		plugin = {"pretty", 
 				"html:target/cucumber-reports/cucumber-pretty.html",
