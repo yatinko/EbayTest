@@ -29,7 +29,7 @@ public class BaseClass {
 			prop = new Properties();
 			
 			FileInputStream fis = new FileInputStream
-					("src/test/java/Config/config.properties");
+					("src/test/resources/Configuration/config.properties");
 			prop.load(fis);
 			}
 		catch(FileNotFoundException e){
